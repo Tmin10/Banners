@@ -34,8 +34,8 @@ class sys {
     static function autorization($name, $password)
     {
         //Проверяем наличие такого пользователя с email
-        $SQL='SELECT `id`, `first_name`, `last_name`, `middle_name`, `salt`, `access_level` '
-           . 'FROM `users` WHERE `id`=\''.(int)$name.'\' AND password=MD5(CONCAT(md5(\''.sys::$mysqli->escape_string($password).'\'),md5(salt)))';
+        $SQL='SELECT `id`, `email` '
+           . 'FROM `users` WHERE `email`=\''.sys::$mysqli->escape_string($name).'\' AND `password`=\''.sys::$mysqli->escape_string($password).'\'';
         sys::$mysqli->real_query($SQL);
         $result = sys::$mysqli->store_result();
         if ($result->num_rows==1)
@@ -45,11 +45,7 @@ class sys {
            //Пишем в сессию и отдаём ответ
            $_SESSION['authorized']=true;
            $_SESSION['id']=$row[0];
-           $_SESSION['f_name']=$row[1];
-           $_SESSION['l_name']=$row[2];
-           $_SESSION['m_name']=$row[3];
-           $_SESSION['access_level']=$row[5];
-           
+           $_SESSION['email']=$row[1];
            
            return true;
         }
