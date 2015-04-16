@@ -1,5 +1,5 @@
 <?php
-class default_controller extends Controller{
+class default_controller extends controller{
     function __construct()
     {
       $this->model = new default_model();

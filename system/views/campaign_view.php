@@ -14,8 +14,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="<?php echo conf::BASE_URL ?>">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="<?php echo conf::BASE_URL ?>campaign/">Campaigns</a></li>
+        <li><a href="<?php echo conf::BASE_URL ?>">Home</a></li>
+        <li class="active"><a href="<?php echo conf::BASE_URL ?>campaign/">Campaigns <span class="sr-only">(current)</span></a></li>
         <li><a href="<?php echo conf::BASE_URL ?>banner/">Banners</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
