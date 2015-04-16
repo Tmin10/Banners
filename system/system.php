@@ -29,5 +29,5 @@ try {
 }
 catch (Exception $e) {
     //Обработка исключений
-    echo "<br />\r\n".lang::$lang['errors']['error'].": ".$e->getMessage();
+    echo "<br />\r\nException: ".$e->getMessage();
 }
