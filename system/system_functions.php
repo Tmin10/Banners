@@ -55,18 +55,17 @@ class sys {
         }
     }
     
-    /*
-    static function my_hash($password, $salt)
+    static function get_user_id() 
     {
-        $hash=md5($password).md5($salt);
-        for ($i=0; $i<47; $i++)
+        if (sys::is_autorised())
         {
-            $hash=md5($i.$hash);
+            return $_SESSION['id'];
         }
-        return $hash;
+        else
+        {
+            throw new Exception("Failed when try to get user ID.");
+        }
     }
-     *
-     */
 
 
     /*static function registration($name, $sname, $email, $password)

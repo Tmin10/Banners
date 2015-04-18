@@ -27,11 +27,6 @@
     </head>
 
     <body>
-        <div class="container">
-        <?php include_once 'system/views/'.$content_view ?>
-        </div> <!-- /container -->
-      
-      
-      
+    <?php include_once 'system/views/'.$content_view ?>
     </body>
 </html>
