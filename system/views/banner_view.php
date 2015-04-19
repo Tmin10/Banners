@@ -37,7 +37,7 @@
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane<?php if (!isset($data['error']['open'])||$data['error']['open']==='list') {echo 'active';} ?>" id="list">
+            <div role="tabpanel" class="tab-pane<?php if (!isset($data['error']['open'])||$data['error']['open']==='list') {echo ' active';} ?>" id="list">
             <?php
                 if (isset($data))
                 {
@@ -51,6 +51,7 @@
                             . "\t\t\t\t\t\t<th>name</th>\r\n"
                             . "\t\t\t\t\t\t<th>code</th>\r\n"
                             . "\t\t\t\t\t\t<th>moderated</th>\r\n"
+                            . "\t\t\t\t\t\t<th>operations</th>\r\n"
                             . "\t\t\t\t\t</tr>\r\n"
                             . "\t\t\t\t</thead>\r\n"
                             . "\t\t\t\t<tbody>\r\n";
@@ -60,8 +61,24 @@
                             . "\t\t\t\t\t\t<td>".$banner[0]."</td>\r\n"
                             . "\t\t\t\t\t\t<td>".$banner[1]."</td>\r\n"
                             . "\t\t\t\t\t\t<td>".$banner[2]."</td>\r\n"
-                            . "\t\t\t\t\t\t<td>".$banner[3]."</td>\r\n"
-                            . "\t\t\t\t\t\t<td>".$banner[4]."</td>\r\n"
+                            . "\t\t\t\t\t\t<td>".$banner[3]."</td>\r\n";
+                            if ($banner[4]===NULL)
+                            {
+                                $banner[4]='In progress...';
+                            }
+                            echo  "\t\t\t\t\t\t<td>".$banner[4]."</td>\r\n"
+                            . "\t\t\t\t\t\t<td>\r\n"
+                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."banner/manage' method='POST'>\r\n"
+                            . "\t\t\t\t\t\t\t<div class=\"btn-group\" role=\"group\" aria-label=\"operations\">\r\n"
+                            . "\t\t\t\t\t\t\t\t<button type=\"submit\" name='ation' value='edit' class=\"btn btn-default\">\r\n"
+                            . "\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>\r\n"
+                            . "\t\t\t\t\t\t\t\t</button>\r\n"
+                            . "\t\t\t\t\t\t\t\t<button type=\"submit\" name='ation' value='delete' class=\"btn btn-default\">\r\n"
+                            . "\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n"
+                            . "\t\t\t\t\t\t\t\t</button>\r\n"
+                            . "\t\t\t\t\t\t\t\t<input type='hidden' name='banner-id' value='$banner[0]'/>"     
+                            . "\t\t\t\t\t\t\t</div>\r\n"
+                            . "\t\t\t\t\t\t\t\t</form>\r\n" 
                             . "\t\t\t\t\t</tr>\r\n";
                         }
                         echo  "\t\t\t\t</tbody>\r\n"

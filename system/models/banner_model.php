@@ -12,12 +12,7 @@ class banner_model extends model
         {
             while ($row=$result->fetch_row())
             {
-                if ($row[4]===NULL)
-                {
-                    $row[4]='In progress...';
-                }
                 $return['banners'][] = $row;
-                
             }
         }
         else

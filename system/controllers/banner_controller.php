@@ -30,4 +30,9 @@ class banner_controller extends controller{
         header("location:".conf::BASE_URL.'banner');
     }
     
+    function manage_action()
+    {
+        
+    }
+    
 }
