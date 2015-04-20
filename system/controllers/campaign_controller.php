@@ -15,14 +15,13 @@ class campaign_controller {
     
     function index_action()
     {
-        //$data = $this->model->get_data();
-        $this->view->render('campaign_view.php', 'main_temp.php');
-    }
-    
-    function new_action()
-    {
-        //$data = $this->model->get_data();
-        $this->view->render('campaign_view.php', 'main_temp.php');
+        $data = $this->model->get_data_for_index();
+        if (isset($_SESSION['error']))
+        {
+            $data['error']=$_SESSION['error'];
+            unset($_SESSION['error']);
+        }
+        $this->view->render('campaign_view.php', 'main_temp.php', $data);
     }
     
 }

@@ -25,5 +25,92 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div class="container main-container">
-    h-9
+    <div role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"<?php if (!isset($data['error']['open'])||$data['error']['open']==='list') {echo ' class="active"';} ?>>
+                <a href="#list" aria-controls="list" role="tab" data-toggle="tab">Campaigns list</a>
+            </li>
+            <li role="presentation"<?php if (isset($data['error']['open'])&&$data['error']['open']==='new') {echo ' class="active"';} ?>>
+                <a href="#new" aria-controls="new" role="tab" data-toggle="tab">New campaign</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane<?php if (!isset($data['error']['open'])||$data['error']['open']==='list') {echo ' active';} ?>" id="list">
+            <?php 
+                if (isset($data['error'])&&$data['error']['open']==='list')
+                {
+                    foreach ($data['error']['msg'] as $error) 
+                    {
+                        echo "\t\t\t\t<p class=\"text-danger\">$error</p>\r\n";
+                    }
+                }
+           
+                if (isset($data['campaigns']))
+                {
+                    if (count($data['campaigns'])>0)
+                    {
+                        echo "\t\t\t\t<table class=\"table\">\r\n";
+                        echo "\t\t\t\t<thead>\r\n"
+                            . "\t\t\t\t\t<tr>\r\n"
+                            . "\t\t\t\t\t\t<th>id</th>\r\n"
+                            . "\t\t\t\t\t\t<th>name</th>\r\n"
+                            . "\t\t\t\t\t\t<th>operations</th>\r\n"
+                            . "\t\t\t\t\t</tr>\r\n"
+                            . "\t\t\t\t</thead>\r\n"
+                            . "\t\t\t\t<tbody>\r\n";
+                        foreach ($data['campaigns'] as $campaign)
+                        {
+                            echo "\t\t\t\t\t<tr>\r\n"
+                            . "\t\t\t\t\t\t<td>".$campaign[0]."</td>\r\n";  
+                            echo "\t\t\t\t\t\t<td>".$campaign[1]."</td>\r\n"
+                            . "\t\t\t\t\t\t<td>\r\n"
+                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."banner/edit' class='inline' method='POST'>\r\n"
+                            . "\t\t\t\t\t\t\t\t<button type=\"submit\" name='ation' value='edit' class=\"btn btn-default\">\r\n"
+                            . "\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>\r\n"
+                            . "\t\t\t\t\t\t\t\t</button><input type='hidden' name='banner-id' value='$campaign[0]'/></form>\r\n"
+                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."banner/delete' class='inline' method='POST' onsubmit=\"return confirm('Do you really want to delete this banner?');\">"
+                            . "<button type=\"submit\" name='ation' value='delete' class=\"btn btn-default\">\r\n"
+                            . "\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n"
+                            . "\t\t\t\t\t\t\t\t</button>\r\n"
+                            . "\t\t\t\t\t\t\t\t<input type='hidden' name='banner-id' value='$campaign[0]'/>"     
+                            . "\t\t\t\t\t\t\t\t</form>\r\n" 
+                            . "\t\t\t\t\t</tr>\r\n";
+                        }
+                        echo  "\t\t\t\t</tbody>\r\n"
+                        . "\t\t\t\t</table>\r\n";
+                    }
+                    else
+                    {
+                        echo "\r\n\t\t\t\t<br/>\r\n\t\t\t\t<p>No campaigns in database.</p>\r\n";
+                    }
+                }
+            ?>
+            </div>
+            <div role="tabpanel" class="tab-pane<?php if (isset($data['error']['open'])&&$data['error']['open']==='new') {echo ' active';} ?>" id="new">
+                <h3>Add new campaign</h2>
+                <?php 
+                if (isset($data['error'])&&$data['error']['open']==='new')
+                {
+                    foreach ($data['error']['msg'] as $error) 
+                    {
+                        echo "\t\t\t\t<p class=\"text-danger\">$error</p>\r\n";
+                    }
+                }
+                ?>
+                 <form action="<?php echo conf::BASE_URL ?>banner/add_new" method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Campaign name</label>
+                        <input type="text" class="form-control" id="new-banner-name" name="new-banner-name" placeholder="Enter name" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        Add new campaign
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
 </div>
