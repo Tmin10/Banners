@@ -38,7 +38,10 @@ body {
     border-top-right-radius: 0;
 }
 .main-container {
-    padding: 10px;
+    padding: 20px;
     padding-top: 60px;
     background-color: white;
+}
+.inline {
+    display: inline;
 }

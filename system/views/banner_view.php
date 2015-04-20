@@ -38,7 +38,15 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane<?php if (!isset($data['error']['open'])||$data['error']['open']==='list') {echo ' active';} ?>" id="list">
-            <?php
+            <?php 
+                if (isset($data['error'])&&$data['error']['open']==='list')
+                {
+                    foreach ($data['error']['msg'] as $error) 
+                    {
+                        echo "\t\t\t\t<p class=\"text-danger\">$error</p>\r\n";
+                    }
+                }
+           
                 if (isset($data))
                 {
                     if (count($data['banners'])>0)
@@ -58,8 +66,12 @@
                         foreach ($data['banners'] as $banner)
                         {
                             echo "\t\t\t\t\t<tr>\r\n"
-                            . "\t\t\t\t\t\t<td>".$banner[0]."</td>\r\n"
-                            . "\t\t\t\t\t\t<td>".$banner[1]."</td>\r\n"
+                            . "\t\t\t\t\t\t<td>".$banner[0]."</td>\r\n";
+                            if ($banner[1]===NULL)
+                            {
+                                $banner[1]='Not set';
+                            }   
+                            echo "\t\t\t\t\t\t<td>".$banner[1]."</td>\r\n"
                             . "\t\t\t\t\t\t<td>".$banner[2]."</td>\r\n"
                             . "\t\t\t\t\t\t<td>".$banner[3]."</td>\r\n";
                             if ($banner[4]===NULL)
@@ -68,16 +80,15 @@
                             }
                             echo  "\t\t\t\t\t\t<td>".$banner[4]."</td>\r\n"
                             . "\t\t\t\t\t\t<td>\r\n"
-                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."banner/manage' method='POST'>\r\n"
-                            . "\t\t\t\t\t\t\t<div class=\"btn-group\" role=\"group\" aria-label=\"operations\">\r\n"
+                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."banner/edit' class='inline' method='POST'>\r\n"
                             . "\t\t\t\t\t\t\t\t<button type=\"submit\" name='ation' value='edit' class=\"btn btn-default\">\r\n"
                             . "\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>\r\n"
-                            . "\t\t\t\t\t\t\t\t</button>\r\n"
-                            . "\t\t\t\t\t\t\t\t<button type=\"submit\" name='ation' value='delete' class=\"btn btn-default\">\r\n"
+                            . "\t\t\t\t\t\t\t\t</button><input type='hidden' name='banner-id' value='$banner[0]'/></form>\r\n"
+                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."banner/delete' class='inline' method='POST' onsubmit=\"return confirm('Do you really want to delete this banner?');\">"
+                            . "<button type=\"submit\" name='ation' value='delete' class=\"btn btn-default\">\r\n"
                             . "\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n"
                             . "\t\t\t\t\t\t\t\t</button>\r\n"
                             . "\t\t\t\t\t\t\t\t<input type='hidden' name='banner-id' value='$banner[0]'/>"     
-                            . "\t\t\t\t\t\t\t</div>\r\n"
                             . "\t\t\t\t\t\t\t\t</form>\r\n" 
                             . "\t\t\t\t\t</tr>\r\n";
                         }
@@ -94,7 +105,7 @@
             <div role="tabpanel" class="tab-pane<?php if (isset($data['error']['open'])&&$data['error']['open']==='new') {echo ' active';} ?>" id="new">
                 <h3>Add new banner</h2>
                 <?php 
-                if (isset($data['error']))
+                if (isset($data['error'])&&$data['error']['open']==='new')
                 {
                     foreach ($data['error']['msg'] as $error) 
                     {

@@ -30,9 +30,22 @@ class banner_controller extends controller{
         header("location:".conf::BASE_URL.'banner');
     }
     
-    function manage_action()
+    function edit_action()
     {
-        
+        $data = $this->model->show_edit_banner();
+        $this->view->render('banner_edit_view.php', 'main_temp.php', $data);
     }
     
+    function save_edit_action()
+    {
+        $this->model->edit_banner();
+        header("location:".conf::BASE_URL.'banner');
+    }
+    
+    function delete_action()
+    {
+        $this->model->delete_banner();
+        header("location:".conf::BASE_URL.'banner');
+    }
+        
 }
