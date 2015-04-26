@@ -66,15 +66,15 @@
                             . "\t\t\t\t\t\t<td>".$campaign[0]."</td>\r\n";  
                             echo "\t\t\t\t\t\t<td>".$campaign[1]."</td>\r\n"
                             . "\t\t\t\t\t\t<td>\r\n"
-                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."banner/edit' class='inline' method='POST'>\r\n"
+                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."campaign/edit' class='inline' method='POST'>\r\n"
                             . "\t\t\t\t\t\t\t\t<button type=\"submit\" name='ation' value='edit' class=\"btn btn-default\">\r\n"
                             . "\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>\r\n"
-                            . "\t\t\t\t\t\t\t\t</button><input type='hidden' name='banner-id' value='$campaign[0]'/></form>\r\n"
-                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."banner/delete' class='inline' method='POST' onsubmit=\"return confirm('Do you really want to delete this banner?');\">"
+                            . "\t\t\t\t\t\t\t\t</button><input type='hidden' name='campaign-id' value='$campaign[0]'/></form>\r\n"
+                            . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."campaign/delete' class='inline' method='POST' onsubmit=\"return confirm('Do you really want to delete this campaign?');\">"
                             . "<button type=\"submit\" name='ation' value='delete' class=\"btn btn-default\">\r\n"
                             . "\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n"
                             . "\t\t\t\t\t\t\t\t</button>\r\n"
-                            . "\t\t\t\t\t\t\t\t<input type='hidden' name='banner-id' value='$campaign[0]'/>"     
+                            . "\t\t\t\t\t\t\t\t<input type='hidden' name='campaign-id' value='$campaign[0]'/>"     
                             . "\t\t\t\t\t\t\t\t</form>\r\n" 
                             . "\t\t\t\t\t</tr>\r\n";
                         }
@@ -99,10 +99,10 @@
                     }
                 }
                 ?>
-                 <form action="<?php echo conf::BASE_URL ?>banner/add_new" method="POST">
+                 <form action="<?php echo conf::BASE_URL ?>campaign/add_new" method="POST">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Campaign name</label>
-                        <input type="text" class="form-control" id="new-banner-name" name="new-banner-name" placeholder="Enter name" required>
+                        <label for="new-campaign-name">Campaign name</label>
+                        <input type="text" class="form-control" id="new-campaign-name" name="new-campaign-name" placeholder="Enter name" required>
                     </div>
                     <button type="submit" class="btn btn-default">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

@@ -25,21 +25,17 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div class="container main-container">    
-    <h3>Edit banner</h2>
-    <form action="<?php echo conf::BASE_URL ?>banner/save_edit" method="POST">
+    <h3>Edit campaign</h2>
+    <form action="<?php echo conf::BASE_URL ?>campaign/save_edit" method="POST">
         <div class="form-group">
-            <label for="new-banner-name">Banner name</label>
-            <input type="text" class="form-control" id="new-banner-name" name="new-banner-name" placeholder="Enter name" required value="<?php if (isset($data['banner'])) {echo $data['banner'][0];} ?>">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Banner code</label>
-            <textarea class="form-control" id="new-banner-code" name="new-banner-code" placeholder="Enter HTMLcode" rows="3" required><?php if (isset($data['banner'])) {echo $data['banner'][1];} ?></textarea>
+            <label for="new-campaign-name">Campaign name</label>
+            <input type="text" class="form-control" id="new-campaign-name" name="new-campaign-name" placeholder="Enter name" required value="<?php if (isset($data['campaign'])) {echo $data['campaign'][0];} ?>">
         </div>
         <button type="submit" class="btn btn-default">
             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-            Save banner
+            Save campaign
         </button>
-        <input type="hidden" name="banner-id" value="<?php if (isset($data['banner'])) {echo $data['banner'][2];} ?>">
+        <input type="hidden" name="campaign-id" value="<?php if (isset($data['campaign'])) {echo $data['campaign'][1];} ?>">
     </form>
 
 </div>
