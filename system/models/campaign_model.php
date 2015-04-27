@@ -5,7 +5,19 @@ class campaign_model extends model{
     public function get_data_for_index() 
     {
         $return = array();
-        sys::$mysqli->real_query("SELECT id, name FROM campaign WHERE user_id = '".sys::get_user_id()."' AND display='1'");
+        sys::$mysqli->real_query("SELECT id, name, c
+                                    FROM campaign
+                                    LEFT JOIN 
+                                    (
+                                        SELECT  `campaign_id` AS cid, COUNT( * ) AS c
+                                        FROM  `banner` 
+                                        WHERE user_id =  '1'
+                                            AND display =  '1'
+                                        GROUP BY `campaign_id`
+                                    ) AS t 
+                                    ON id = cid 
+                                    WHERE user_id = '".sys::get_user_id()."' "
+                                         . "AND display='1'");
         $result = sys::$mysqli->store_result();
         if ($result->num_rows>0)
         {

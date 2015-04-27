@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.5
+-- version 4.0.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Apr 18, 2015 at 07:48 PM
--- Server version: 5.1.71-community-log
--- PHP Version: 5.5.1
+-- Хост: localhost
+-- Время создания: Апр 27 2015 г., 15:51
+-- Версия сервера: 5.5.41-0ubuntu0.14.04.1
+-- Версия PHP: 5.5.9-1ubuntu4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `banners`
+-- База данных: `banners`
 --
+CREATE DATABASE IF NOT EXISTS `banners` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `banners`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banner`
+-- Структура таблицы `banner`
 --
 
 CREATE TABLE IF NOT EXISTS `banner` (
@@ -33,34 +35,60 @@ CREATE TABLE IF NOT EXISTS `banner` (
   `name` varchar(255) NOT NULL,
   `banner_code` mediumtext NOT NULL,
   `moderated` int(11) DEFAULT NULL,
+  `display` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `banner`
+-- Дамп данных таблицы `banner`
 --
 
-INSERT INTO `banner` (`id`, `user_id`, `campaign_id`, `name`, `banner_code`, `moderated`) VALUES
-(1, 1, NULL, 'name', 'name', NULL),
-(2, 1, NULL, 'rfeds', '&#60;a/ class=&#34;erfd&#34; src=&#39;rd&#39;&#62;', NULL);
+INSERT INTO `banner` (`id`, `user_id`, `campaign_id`, `name`, `banner_code`, `moderated`, `display`) VALUES
+(1, 1, 1, 'name', 'name', NULL, 1),
+(2, 1, 1, 'rfeds', '&#60;a/ class=&#34;erfd&#34; src=&#39;rd&#39;&#62;', NULL, 1),
+(3, 1, NULL, 'еее', '&Ntilde;', NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `campaign`
+-- Структура таблицы `campaign`
 --
 
 CREATE TABLE IF NOT EXISTS `campaign` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `display` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Дамп данных таблицы `campaign`
+--
+
+INSERT INTO `campaign` (`id`, `name`, `user_id`, `display`) VALUES
+(1, 'test1', 1, 1),
+(2, 'ef', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `condition`
+--
+
+CREATE TABLE IF NOT EXISTS `condition` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campaign_id` int(11) NOT NULL,
+  `geo` varchar(255) NOT NULL,
+  `tags` varchar(511) NOT NULL,
+  `display` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `modarator_messages`
+-- Структура таблицы `modarator_messages`
 --
 
 CREATE TABLE IF NOT EXISTS `modarator_messages` (
@@ -72,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `modarator_messages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Структура таблицы `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -80,15 +108,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(255) NOT NULL,
+  `display` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `users`
+-- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `salt`) VALUES
-(1, 'test@test.test', 'test', '');
+INSERT INTO `users` (`id`, `email`, `password`, `salt`, `display`) VALUES
+(1, 'test@test.test', 'test', '', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

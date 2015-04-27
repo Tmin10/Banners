@@ -34,6 +34,13 @@
             <li role="presentation"<?php if (isset($data['error']['open'])&&$data['error']['open']==='new') {echo ' class="active"';} ?>>
                 <a href="#new" aria-controls="new" role="tab" data-toggle="tab">New campaign</a>
             </li>
+            <li role="presentation"<?php if (isset($data['error']['open'])&&$data['error']['open']==='condition-list') {echo ' class="active"';} ?>>
+                <a href="#condition-list" aria-controls="condition-list" role="tab" data-toggle="tab">Conditions list</a>
+            </li>
+            <li role="presentation"<?php if (isset($data['error']['open'])&&$data['error']['open']==='condition-new') {echo ' class="active"';} ?>>
+                <a href="#condition-new" aria-controls="condition-new" role="tab" data-toggle="tab">New condition</a>
+            </li>
+            
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -56,6 +63,7 @@
                             . "\t\t\t\t\t<tr>\r\n"
                             . "\t\t\t\t\t\t<th>id</th>\r\n"
                             . "\t\t\t\t\t\t<th>name</th>\r\n"
+                            . "\t\t\t\t\t\t<th>banners</th>\r\n"
                             . "\t\t\t\t\t\t<th>operations</th>\r\n"
                             . "\t\t\t\t\t</tr>\r\n"
                             . "\t\t\t\t</thead>\r\n"
@@ -64,7 +72,13 @@
                         {
                             echo "\t\t\t\t\t<tr>\r\n"
                             . "\t\t\t\t\t\t<td>".$campaign[0]."</td>\r\n";  
-                            echo "\t\t\t\t\t\t<td>".$campaign[1]."</td>\r\n"
+                            echo "\t\t\t\t\t\t<td>".$campaign[1]."</td>\r\n";
+                            if ($campaign[2]===null)
+                            {
+                                $campaign[2]=0;
+                            }
+                            $campaign[2].=' (<a href="campaign/add_banners">add more</a>)';
+                            echo "\t\t\t\t\t\t<td>".$campaign[2]."</td>\r\n"
                             . "\t\t\t\t\t\t<td>\r\n"
                             . "\t\t\t\t\t\t\t\t<form action='".conf::BASE_URL."campaign/edit' class='inline' method='POST'>\r\n"
                             . "\t\t\t\t\t\t\t\t<button type=\"submit\" name='ation' value='edit' class=\"btn btn-default\">\r\n"
@@ -110,6 +124,13 @@
                     </button>
                 </form>
             </div>
+            <div role="tabpanel" class="tab-pane<?php if (isset($data['error']['open'])&&$data['error']['open']==='condition-list') {echo ' active';} ?>" id="condition-list">
+                
+            </div>
+            <div role="tabpanel" class="tab-pane<?php if (isset($data['error']['open'])&&$data['error']['open']==='condition-new') {echo ' active';} ?>" id="condition-new">
+                
+            </div>
+            
         </div>
 
     </div>

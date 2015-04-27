@@ -6,7 +6,8 @@ class banner_model extends model
     public function get_data_for_index() 
     {
         $return = array();
-        sys::$mysqli->real_query("SELECT id, campaign_id, name, banner_code, moderated FROM banner WHERE user_id = '".sys::get_user_id()."' AND display='1'");
+        sys::$mysqli->real_query("SELECT id, campaign_id, name, banner_code, moderated FROM banner "
+                . "WHERE user_id = '".sys::get_user_id()."' AND display='1'");
         $result = sys::$mysqli->store_result();
         if ($result->num_rows>0)
         {
